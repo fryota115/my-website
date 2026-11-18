@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>タスク管理</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <header class="header"><div class="brand"><span class="logo" aria-hidden="true">✓</span>タスク管理</div></header>
+  <main>
+    <section class="intro"><div><h1>タスク管理</h1></div><span id="today" class="today"></span></section>
+    <section class="progress-card" aria-label="全タスクの進捗"><div class="progress-heading"><div><span class="small-label">進捗状況</span><p><strong id="completed-count">0</strong><span class="muted"> / <span id="total-count">0</span> タスク完了</span></p></div><div class="percentage"><span id="percentage">0</span><small>%</small></div></div><progress id="progress" max="100" value="0">0%</progress><p id="progress-message" class="muted">タスクはありません。</p></section>
+    <p id="notice" class="notice" role="status" aria-live="polite" hidden></p>
+    <div class="workspace">
+      <section class="panel form-panel"><div class="section-title"><span class="square-icon" aria-hidden="true">＋</span><h2 id="form-title">タスクを追加</h2></div>
+        <form id="task-form">
+          <label for="task-name">タスク名 <span class="required">必須</span></label><input id="task-name" name="title" placeholder="例：読みかけの本を読む" required maxlength="100" autocomplete="off">
+          <label for="task-description">詳細説明 <span class="optional">任意</span></label><textarea id="task-description" name="description" placeholder="メモや、やることの詳細を入力" maxlength="2000" rows="4"></textarea>
+          <label for="task-date">締切日 <span class="optional">任意</span></label><input type="date" id="task-date" name="dueDate" min="0001-01-01" max="9999-12-31">
+          <label for="task-priority">優先度</label><select id="task-priority" name="priority"><option value="high">高</option><option value="medium" selected>中</option><option value="low">低</option></select>
+          <button type="submit" class="primary" id="submit-button">＋ タスクを追加</button><button type="button" id="cancel-edit" class="secondary" hidden>編集をキャンセル</button>
+        </form><p class="storage-note">このブラウザに自動で保存されます</p>
+      </section>
+      <section class="tasks-area"><div class="list-heading"><h2>タスク一覧 <span id="visible-count" class="count">0</span></h2><label class="sort-label" for="sort">並び替え<select id="sort"><option value="created">追加が新しい順</option><option value="due">締切日が近い順</option><option value="priority">優先度が高い順</option></select></label></div>
+        <div class="filters" role="group" aria-label="タスクの絞り込み"><button type="button" data-filter="all" aria-pressed="true">すべて</button><button type="button" data-filter="active" aria-pressed="false">未完了</button><button type="button" data-filter="completed" aria-pressed="false">完了済み</button></div>
+        <div id="task-list" class="task-list"></div>
+        <div id="empty-state" class="empty-state"><span class="empty-icon" aria-hidden="true">✓</span><h3>タスクはありません</h3><p>フォームからタスクを追加してください。</p></div>
+      </section>
+    </div>
+    <footer><span>タスク管理</span></footer>
+  </main>
+</body>
+</html>
