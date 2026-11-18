@@ -204,3 +204,16 @@ document.querySelectorAll('[data-filter]').forEach(button => button.addEventList
 document.querySelector('#sort').addEventListener('change', render);
 document.querySelector('#today').textContent = new Intl.DateTimeFormat('ja-JP', { month: 'long', day: 'numeric', weekday: 'short' }).format(new Date());
 render();
+
+// GitHub Pagesのこのアプリの範囲で、オフライン表示を有効にします。
+if ('serviceWorker' in navigator && window.isSecureContext &&
+    location.pathname.startsWith('/my-website/')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/my-website/service-worker.js', {
+      scope: '/my-website/',
+      updateViaCache: 'none'
+    }).catch(error => {
+      console.warn('オフライン機能を有効にできませんでした。', error);
+    });
+  });
+}
